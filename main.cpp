@@ -7,6 +7,7 @@ int wielkosc_planszy;
 
 int main()
 {
+    srand(time(0)); // Inicjalizacja generatora liczb losowych
     printf("Hello World");
 
     return 0;
