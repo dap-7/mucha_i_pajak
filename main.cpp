@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <vector>
 #include <utility>
-
+#include <iostream>
 std::pair<int, int> mucha, pajak;
 int wielkosc_planszy;
 
