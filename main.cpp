@@ -8,7 +8,8 @@ int wielkosc_planszy;
 int main()
 {
     srand(time(0)); // Inicjalizacja generatora liczb losowych
-    printf("Hello World");
+    std::cout << "Jaka wielkość planszy (3,5,7): ";
+    std::cin >> wielkosc_siatki;
 
     return 0;
 }
