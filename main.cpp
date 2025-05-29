@@ -28,7 +28,7 @@ void losuj_poczatek_pajaka()
     }
     //sprawdzenie: for(i=0; i<vec.size(); i++){std::cout << "(" << vec[i].first << "," << vec[i].second << "),";}
     //losowanie pozycji początkowej pajaka
-    i = (rand() % wielkosc_planszy);
+    i = rand() % wielkosc_planszy;
     //sprawdzenie: std::cout << "element: " << i << ", P(x, y) = (" << vec[i].first << ", " << vec[i].second << ")" <<  std::endl;
     //przypisanie wylosowanej pozycji pająkowi
     pajak.first = vec[i].first;
@@ -53,6 +53,21 @@ void pokazPlansze(){
         }
         std::cout << std::endl;
     }
+}
+
+void przesun(std::pair<int, int> kogo, int kierunek){
+    
+}
+
+int ruch_pajaka(){
+    //losuj ruch pajaka
+    int k = rand() % 4;
+    przesun(pajak, k);
+    return -1;
+}
+
+int ruch_muchy(){
+    return -1;
 }
 
 int main()
