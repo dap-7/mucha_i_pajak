@@ -1,56 +1,101 @@
+#include <stdio.h>
+#include <vector>
+#include <utility>
 #include <iostream>
 #include <string>
-int g, k, pg, pk, grasz_dalej;
 
-std::string f0(int numer){
-    if (numer == 1){
-        return "papier";
-    }
-    if (numer == 2){
-        return "nożyce";
-    }
-    if (numer == 3){
-        return "kamień";
-    }
-}
-int f1() {
-    int grasz_dalej;
-    pk, pg = 0; //zerowanie punktów
-    while (pk < 3 && pg < 3){
-        std::cout << "Aktualna punktacja: " << pg << ":" << pk << std::endl;
-        std::cout << "Twój ruch! (1: papier, 2: nożyce, 3:kamień) : ";
-        std::cin >> g;
-        k = (rand() % 3) + 1; //losuje wybór komputera
-        std::cout << "Ty : " << f0(g) << ", Komputer : " << f0(k) << " ... " << std::endl;
-        
-        if((g==2 && k == 1) || (g==3 && k == 2) || (g==1 && k == 3)){
-            pg++;
-            std::cout << "Punkt dla Ciebie!"  << std::endl;
-        }
-        if((k==2 && g == 1) || (k==3 && g == 2) || (k==1 && g == 3)){
-            pk++;
-            std::cout << "Punkt dla Komputera!" << std::endl;
-        }
-        if((g==1 && k == 1) || (g==2 && k == 2) || (g==3 && k == 3)){
-            std::cout << "Remis!" << std::endl;
-        }
-    }
-    if (pk == 3){
-        std::cout << "Nie udało się... Komputer wygrwał... " << std::endl;
-    } else {
-        std::cout << "Brawo! Wygrałeś!" << std::endl;
-    }
-    std::cout << "Grasz dalej? (1: TAK, 0: NIE) : ";
-    std::cin >> grasz_dalej;
-    return grasz_dalej;
+std::pair<int, int> mucha, pajak;
+int wielkosc_planszy;
+
+void ustaw_muche_na_srodku()
+{
+    mucha.first = mucha.second = ((wielkosc_planszy)/2) +1;
 }
 
-int main() {
+void losuj_poczatek_pajaka()
+{
+    int i;
+    std::vector<std::pair<int, int>> vec; // Deklaracja pustego wektora par liczb całkowitych
+    std::pair<int, int> nthPair;
+    for (i=1; i<=wielkosc_planszy; i++){ 
+        //np. wynik dla wielkosc_planszy=5: (1,1) i (1,5), potem (2,1) i (2,5), potem (3,1) i (3,5) itd
+        vec.push_back({i, 1}); 
+        vec.push_back({i, wielkosc_planszy});
+    }
+    for(i=2; i<wielkosc_planszy; i++){
+        //np. wynik dla wielkosc_planszy=5: (1,2) i (5,2), potem (1,3) i (5,3), potem (1,4) i (5,4) i koniec
+        vec.push_back({1, i});
+        vec.push_back({wielkosc_planszy, i});
+    }
+    //sprawdzenie: for(i=0; i<vec.size(); i++){std::cout << "(" << vec[i].first << "," << vec[i].second << "),";}
+    //losowanie pozycji początkowej pajaka
+    i = rand() % wielkosc_planszy;
+    //sprawdzenie: std::cout << "element: " << i << ", P(x, y) = (" << vec[i].first << ", " << vec[i].second << ")" <<  std::endl;
+    //przypisanie wylosowanej pozycji pająkowi
+    pajak.first = vec[i].first;
+    pajak.second = vec[i].second;
+}
+
+void pokazPlansze(){
+    int x, y;
+    for (y=wielkosc_planszy; y>=1; y--){
+        for (x=1; x<=wielkosc_planszy; x++){
+            if (x==mucha.first && y==mucha.second){
+                std::cout << "M" << " ";
+            } 
+            else{
+                if (x==pajak.first && y==pajak.second){
+                    std::cout << "P" << " ";
+                } 
+                else {
+                    std::cout << "\u25A1" << " ";
+                }
+            }
+        }
+        std::cout << std::endl;
+    }
+}
+
+void przesun(std::pair<int, int> kogo, int kierunek){
+    
+}
+
+int ruch_pajaka(){
+    //losuj ruch pajaka
+    int k = rand() % 4;
+    przesun(pajak, k);
+    return -1;
+}
+
+int ruch_muchy(){
+ std::string klick;
+ std::cout << "wybierz ruch muchy (w,a,s,d):";
+ int kier;
+    std::cin >> klick;
+    if (klick=="w"){
+        kier=0;
+    }
+    if (klick=="s"){
+        kier=1;
+    }
+    if (klick=="a"){
+        kier=2;
+    }
+    if (klick=="d"){
+        kier=3;
+    }
+    return -1;
+}
+
+int main()
+{
     srand(time(0)); // Inicjalizacja generatora liczb losowych
-    while (f1() == 1) {
-        std::cout << "Gramy dalej!" << std::endl;
-    }
-
-    std::cout << "Dziękuję! Do następnego!" << std::endl;
+    std::cout << "Jaka wielkość planszy (3,5,7): ";
+    std::cin >> wielkosc_planszy;
+    losuj_poczatek_pajaka();
+    ustaw_muche_na_srodku();
+    pokazPlansze();
+    ruch_muchy();
+    pokazPlansze();
     return 0;
 }
