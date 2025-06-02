@@ -56,6 +56,20 @@ void pokazPlansze(){
 }
 
 void przesun(std::pair<int, int> kogo, int kierunek){
+    if(kierunek==0 && kogo.second<wielkosc_planszy){
+        kogo.second++;
+    }
+    
+    if(kierunek==1 && kogo.second>1){
+        kogo.second--;
+     
+   }
+    if(kierunek==2 && kogo.first>1){
+        kogo.first--;
+    }
+    if(kierunek==3 && kogo.first<wielkosc_planszy){
+        kogo.first++;
+    }
     
 }
 
