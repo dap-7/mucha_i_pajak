@@ -2,6 +2,7 @@
 #include <vector>
 #include <utility>
 #include <iostream>
+#include <string>
 
 std::pair<int, int> mucha, pajak;
 int wielkosc_planszy;
@@ -56,20 +57,6 @@ void pokazPlansze(){
 }
 
 void przesun(std::pair<int, int> kogo, int kierunek){
-    if(kierunek==0 && kogo.second<wielkosc_planszy){
-        kogo.second++;
-    }
-    
-    if(kierunek==1 && kogo.second>1){
-        kogo.second--;
-     
-   }
-    if(kierunek==2 && kogo.first>1){
-        kogo.first--;
-    }
-    if(kierunek==3 && kogo.first<wielkosc_planszy){
-        kogo.first++;
-    }
     
 }
 
@@ -81,6 +68,22 @@ int ruch_pajaka(){
 }
 
 int ruch_muchy(){
+ std::string klick;
+ std::cout << "wybierz ruch muchy (w,a,s,d):";
+ int kier;
+    std::cin >> klick;
+    if (klick=="w"){
+        kier=0;
+    }
+    if (klick=="s"){
+        kier=1;
+    }
+    if (klick=="a"){
+        kier=2;
+    }
+    if (klick=="d"){
+        kier=3;
+    }
     return -1;
 }
 
@@ -92,6 +95,7 @@ int main()
     losuj_poczatek_pajaka();
     ustaw_muche_na_srodku();
     pokazPlansze();
+    ruch_muchy();
+    pokazPlansze();
     return 0;
 }
-
