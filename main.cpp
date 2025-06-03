@@ -67,7 +67,7 @@ if(kierunek==2 && kogo.first > 1){
 kogo.first--;
 }
 if(kierunek==3 && kogo.first > wielkosc_planszy){
-kogo.first--;
+kogo.first++;
 }
 }
 int ruch_pajaka(){
