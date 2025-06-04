@@ -56,20 +56,29 @@ void pokazPlansze(){
     }
 }
 
-void przesun(std::pair<int, int> kogo, int kierunek){
+int przesun(std::pair<int, int> kogo, int kierunek){
+//ustalilismy miedzy soba, ze 0 = gora, 1 = dol, 2 = lewo, 3 = prawo
+//jesli ruch jest poprawny/mozliwy to zwroc 1, w przeciwnym wypadku zwroc 0 (np. stoisz na samej gorze a chcesz pojsc do gory - nic nie przesunie i zwroci 0)
+int ruch_poprawny = 0;
 if(kierunek==0 && kogo.second < wielkosc_planszy){
-kogo.second++;
+    kogo.second++;
+    ruch_poprawny = 1;
 }
 if(kierunek==1 && kogo.second > 1){
-kogo.second--;
+    kogo.second--;
+    ruch_poprawny = 1;
 }
 if(kierunek==2 && kogo.first > 1){
-kogo.first--;
+    kogo.first--;
+    ruch_poprawny = 1;
 }
-if(kierunek==3 && kogo.first > wielkosc_planszy){
-kogo.first++;
+if(kierunek==3 && kogo.first < wielkosc_planszy){
+    kogo.first++;
+    ruch_poprawny = 1;
 }
+return ruch_poprawny;
 }
+
 int ruch_pajaka(){
     //losuj ruch pajaka
     int k = rand() % 4;
