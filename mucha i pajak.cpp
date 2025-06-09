@@ -122,13 +122,20 @@ bool kolizja(){
 
 int main()
 {
+    bool czy_kolizja = false;
     srand(time(0)); // Inicjalizacja generatora liczb losowych
     std::cout << "Jaka wielkość planszy (3,5,7): ";
     std::cin >> wielkosc_planszy;
     losuj_poczatek_pajaka();
     ustaw_muche_na_srodku();
     pokazPlansze();
-    ruch_muchy();
-    pokazPlansze();
+     while (czy_kolizja == false)
+    {
+        ruch_muchy();
+        czy_kolizja = kolizja();
+        ruch_pajaka();
+        czy_kolizja = kolizja();
+        pokazPlansze();
+    }
     return 0;
 }
