@@ -56,7 +56,7 @@ void pokazPlansze(){
     }
 }
 
-int przesun(std::pair<int, int> kogo, int kierunek){
+int przesun(std::pair<int, int>& kogo, int kierunek){
 //ustalilismy miedzy soba, ze 0 = gora, 1 = dol, 2 = lewo, 3 = prawo
 //jesli ruch jest poprawny/mozliwy to zwroc 1, w przeciwnym wypadku zwroc 0 (np. stoisz na samej gorze a chcesz pojsc do gory - nic nie przesunie i zwroci 0)
 int ruch_poprawny = 0;
@@ -103,18 +103,12 @@ int ruch_muchy(){
     if (klick=="d"){
         kier=3;
     }
+    przesun(mucha, kier);
     return -1;
 }
 
 int main()
 {
+    bool czy_kolizja = false;
     srand(time(0)); // Inicjalizacja generatora liczb losowych
-    std::cout << "Jaka wielkość planszy (3,5,7): ";
-    std::cin >> wielkosc_planszy;
-    losuj_poczatek_pajaka();
-    ustaw_muche_na_srodku();
-    pokazPlansze();
-    ruch_muchy();
-    pokazPlansze();
-    return 0;
-}
+    std
