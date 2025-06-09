@@ -76,7 +76,6 @@ if(kierunek==3 && kogo.first < wielkosc_planszy){
     
     kogo.first++;
     ruch_poprawny = 1;
-    std::cout << mucha.first << kogo.first << std::endl;
 }
 return ruch_poprawny;
 }
@@ -112,7 +111,6 @@ int ruch_muchy(){
 
 bool kolizja(){
     if(mucha.first==pajak.first && mucha.second==pajak.second){
-        std::cout<<"pająk zjadł muchę";
         return true;
     } 
         else {
@@ -133,7 +131,12 @@ int main()
     {
         ruch_muchy();
         czy_kolizja = kolizja();
-        ruch_pajaka();
+        if(czy_kolizja == false){
+            ruch_pajaka();
+        }
+        else{
+            std::cout << std::endl << "Przegrałeś. Pająk robi om nom nom." << std::endl;    
+        }
         czy_kolizja = kolizja();
         pokazPlansze();
     }
