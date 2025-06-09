@@ -73,8 +73,10 @@ if(kierunek==2 && kogo.first > 1){
     ruch_poprawny = 1;
 }
 if(kierunek==3 && kogo.first < wielkosc_planszy){
+    
     kogo.first++;
     ruch_poprawny = 1;
+    std::cout << mucha.first << kogo.first << std::endl;
 }
 return ruch_poprawny;
 }
@@ -103,12 +105,30 @@ int ruch_muchy(){
     if (klick=="d"){
         kier=3;
     }
-    przesun(mucha, kier);
+    
+    przesun(mucha,kier);
     return -1;
+}
+
+bool kolizja(){
+    if(mucha.first==pajak.first && mucha.second==pajak.second){
+        std::cout<<"pająk zjadł muchę";
+        return true;
+    } 
+        else {
+            return false;
+        }    
 }
 
 int main()
 {
-    bool czy_kolizja = false;
     srand(time(0)); // Inicjalizacja generatora liczb losowych
-    std
+    std::cout << "Jaka wielkość planszy (3,5,7): ";
+    std::cin >> wielkosc_planszy;
+    losuj_poczatek_pajaka();
+    ustaw_muche_na_srodku();
+    pokazPlansze();
+    ruch_muchy();
+    pokazPlansze();
+    return 0;
+}
