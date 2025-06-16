@@ -38,6 +38,7 @@ void losuj_poczatek_pajaka()
 
 void pokazPlansze(){
     int x, y;
+        std::wstring MessagWithWebdings = L"test \u00A3";
     for (y=wielkosc_planszy; y>=1; y--){
         for (x=1; x<=wielkosc_planszy; x++){
             if (x==mucha.first && y==mucha.second){
