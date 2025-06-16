@@ -119,7 +119,9 @@ bool kolizja(){
 }
 
 int main()
-{
+{  
+int licznik_ruchow=0;
+
     bool czy_kolizja = false;
     srand(time(0)); // Inicjalizacja generatora liczb losowych
     std::cout << "Jaka wielkość planszy (3,5,7): ";
@@ -127,9 +129,12 @@ int main()
     losuj_poczatek_pajaka();
     ustaw_muche_na_srodku();
     pokazPlansze();
-     while (czy_kolizja == false)
+     while (czy_kolizja == false && licznik_ruchow < 10)
     {
+        licznik_ruchow++;
+        
         ruch_muchy();
+        
         czy_kolizja = kolizja();
         if(czy_kolizja == false){
             ruch_pajaka();
@@ -138,7 +143,13 @@ int main()
             std::cout << std::endl << "Przegrałeś. Pająk robi om nom nom." << std::endl;    
         }
         czy_kolizja = kolizja();
+        if (czy_kolizja) {
+            std::cout << std::endl << "Przegrałeś. Pająk robi om nom nom." << std::endl;
+        }
         pokazPlansze();
+    }
+    if (czy_kolizja == false){
+        std::cout << std::endl << "Hura!!!  Mucha przyzyla" << std::endl;
     }
     return 0;
 }
